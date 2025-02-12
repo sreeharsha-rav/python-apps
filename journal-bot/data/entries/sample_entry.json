@@ -1,0 +1,25 @@
+{
+  "date": "2023-12-20T20:30:00Z",
+  "opening_reflection": {
+    "prompt": "In this moment, I notice...",
+    "response": "a sense of calm and focus as I sit down to reflect"
+  },
+  "modules": {
+    "emotional_awareness": {
+      "emotions": "feeling content and slightly anxious",
+      "body_sensation": "slight tension in shoulders, warmth in chest",
+      "triggers": "upcoming project deadline",
+      "responses": "taking deep breaths and breaking tasks into smaller steps"
+    },
+    "growth_reflection": {
+      "challenges": "debugging a complex issue in my code",
+      "learnings": "importance of systematic testing",
+      "growth_opportunities": "improving debugging methodology",
+      "future_approaches": "implement better logging and testing practices"
+    }
+  },
+  "closing_integration": {
+    "prompt": "Today's wisdom I want to remember...",
+    "response": "Progress over perfection, small steps lead to big changes"
+  }
+}

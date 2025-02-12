@@ -1,0 +1,125 @@
+{
+  "opening_reflection": {
+    "prompts": [
+      "What phrase or theme wants to guide your reflection today?",
+      "I'm bringing my attention to... (what deserves your focus right now?)",
+      "Today, my intention is... (what quality or mindset would serve you best?)",
+      "In this moment, I notice... (focus on physical sensations, emotions, or thoughts)",
+      "The energy I want to bring today is... (what emotional state would support your growth?)",
+      "My commitment to myself today is... (how will you honor your needs?)"
+    ]
+  },
+  "modules": {
+    "emotional_awareness": {
+      "emotions": [
+        "In this moment, what emotions are present for me?",
+        "What emotions are present for me right now? (name them without judgment)",
+        "How intense are these emotions on a scale of 1-10?",
+        "Which emotions feel most prominent?",
+        "What emotional weather patterns did you experience today? (Use metaphor)"
+      ],
+      "body_sensation": [
+        "How do these emotions show up in my body?",
+        "Where in my body do I feel these emotions most strongly?",
+        "What physical sensations am I experiencing?",
+        "How is my body telling me what I need right now?"
+      ],
+      "triggers": [
+        "What events or thoughts preceded these emotions?",
+        "What patterns do I notice in what triggers these feelings?",
+        "How do these triggers relate to my core values or needs?"
+      ],
+      "responses": [
+        "How am I choosing to respond to these emotions?",
+        "What self-compassionate action could I take?",
+        "What would I tell a friend feeling this way?"
+      ]
+    },
+    "growth_reflection": {
+      "challenges": [
+        "What resistance or obstacles did I encounter today?",
+        "What pushed me outside my comfort zone today?",
+        "What challenged me today, and how did it test my capabilities?",
+        "What made me step out of my comfort zone?"
+      ],
+      "learnings": [
+        "What did I learn about myself through this experience?",
+        "What did I learn from today's challenges?",
+        "What new insights or skills did I gain from today's experiences?",
+        "How did this challenge help me discover my strengths?"
+      ],
+      "growth_opportunities": [
+        "How can this challenge contribute to my personal growth?",
+        "What skills or qualities could I develop from this experience?",
+        "Where do I see potential for development?"
+      ],
+      "future_approaches": [
+        "How could you approach this differently with 10% more self-compassion and understanding?",
+        "What strategies could I try next time?",
+        "How might I approach similar situations differently?",
+        "What resources or support could help me grow in this area?"
+      ]
+    },
+    "gratitude_joy": {
+      "joy_moments": [
+        "What brought a smile to my face today?",
+        "When did I feel most alive or energized?",
+        "What simple pleasures did I experience?"
+      ],
+      "gratitude": [
+        "What is an oridinary thing I can be grateful for today?",
+        "What am I deeply thankful for in this moment?",
+        "What often-overlooked aspects of my life deserve appreciation?",
+        "What challenges am I grateful for because they helped me grow?"
+      ],
+      "positive_connections": [
+        "What thought or moment made me feel positively connected to family, friends, or colleagues?",
+        "Who supported or inspired me today?",
+        "How did I contribute to others' well-being?",
+        "What meaningful interactions did I experience?"
+      ],
+      "small_wins": [
+        "What tiny progress deserves celebration today?",
+        "What progress, no matter how small, did I make today?",
+        "What personal strengths did I utilize?",
+        "What did I accomplish that I'm proud of?"
+      ]
+    },
+    "future_focused": {
+      "possibilities": [
+        "What exciting possibilities would like to courageously explore?",
+        "What opportunities am I excited about?",
+        "What potential do I see in my current situation?",
+        "What would become possible if I fully believed in myself?"
+      ],
+      "next_steps": [
+        "What 1% action can drive me to the future I envision?",
+        "What small, manageable action could move me forward?",
+        "How can I break down my goals into smaller steps?",
+        "What's the next right thing for me to do?"
+      ],
+      "support_needed": [
+        "What resources would make this journey more achievable and sustainable?",
+        "What resources would help me succeed?",
+        "Who could I reach out to for guidance or support?",
+        "What do I need to feel more confident moving forward?"
+      ],
+      "aspirations": [
+        "How does this align with my deepest values and aspirations?",
+        "How do my current actions align with my values?",
+        "What kind of person am I becoming?",
+        "What vision for my future inspires me?"
+      ]
+    }
+  },
+  "closing_integration": {
+    "prompts": [
+      "From today's insights, what phrase or sentence would you like to carry forward?",
+      "Today's wisdom I want to remember... (what key insight stands out?)",
+      "I honor myself for... (acknowledge your efforts and courage)",
+      "Tomorrow, I look forward to... (set a positive intention)",
+      "One thing I did today that served my growth was... (celebrate progress)",
+      "I choose to let go of... (practice self-compassion and release)"
+    ]
+  }
+}

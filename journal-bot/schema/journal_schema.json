@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Journal Entry",
+  "type": "object",
+  "required": ["date", "opening_reflection", "modules", "closing_integration"],
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "opening_reflection": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Custom prompt for opening reflection"
+        },
+        "response": {
+          "type": "string"
+        }
+      },
+      "required": ["prompt", "response"]
+    },
+    "modules": {
+      "type": "object",
+      "required": ["emotional_awareness", "growth_reflection"],
+      "properties": {
+        "emotional_awareness": {
+          "type": "object",
+          "required": ["emotions", "body_sensation", "triggers", "responses"],
+          "properties": {
+            "emotions": { "type": "string" },
+            "body_sensation": { "type": "string" },
+            "triggers": { "type": "string" },
+            "responses": { "type": "string" }
+          }
+        },
+        "growth_reflection": {
+          "type": "object",
+          "required": [
+            "challenges",
+            "learnings",
+            "growth_opportunities",
+            "future_approaches"
+          ],
+          "properties": {
+            "challenges": { "type": "string" },
+            "learnings": { "type": "string" },
+            "growth_opportunities": { "type": "string" },
+            "future_approaches": { "type": "string" }
+          }
+        },
+        "gratitude_joy": {
+          "type": "object",
+          "properties": {
+            "joy_moments": { "type": "string" },
+            "gratitude": { "type": "string" },
+            "positive_connections": { "type": "string" },
+            "small_wins": { "type": "string" }
+          }
+        },
+        "future_focused": {
+          "type": "object",
+          "properties": {
+            "possibilities": { "type": "string" },
+            "next_steps": { "type": "string" },
+            "support_needed": { "type": "string" },
+            "aspirations": { "type": "string" }
+          }
+        }
+      }
+    },
+    "closing_integration": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "Custom prompt for closing integration"
+        },
+        "response": {
+          "type": "string"
+        }
+      },
+      "required": ["prompt", "response"]
+    }
+  }
+}
