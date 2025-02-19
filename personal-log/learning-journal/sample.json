@@ -16,9 +16,5 @@
       "insight": "Taking breaks every 90 minutes aligns with natural energy cycles",
       "connection": "Can structure deep work sessions around this rhythm"
     }
-  ],
-  "reflection": {
-    "keyTakeways": "Today was about optimization - both in code (React performance) and personal productivity (energy management). The team communication insight will make remote work smoother",
-    "actionItems": "Implement useMemo in the dashboard component tomorrow. Set up 90-minute focus blocks in calendar."
-  }
+  ]
 }

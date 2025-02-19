@@ -1,0 +1,11 @@
+{
+  "gratitude_joy": {
+    "type": "object",
+    "properties": {
+      "joy_moments": { "type": "string" },
+      "gratitude": { "type": "string" },
+      "positive_connections": { "type": "string" },
+      "small_wins": { "type": "string" }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Learning Journal",
+  "description": "Learnings throughout the day",
   "type": "object",
   "properties": {
     "date": {
@@ -28,21 +29,7 @@
         },
         "required": ["topic", "insight"]
       }
-    },
-    "reflection": {
-      "type": "object",
-      "properties": {
-        "keyTakeaways": {
-          "type": "string",
-          "description": "Main learnings and insights from the day"
-        },
-        "actionItems": {
-          "type": "string",
-          "description": "Next steps or areas to explore further"
-        }
-      },
-      "required": ["keyTakeaways", "actionItems"]
     }
   },
-  "required": ["date", "learnings", "reflection"]
+  "required": ["date", "learnings"]
 }

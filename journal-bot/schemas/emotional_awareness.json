@@ -1,0 +1,12 @@
+{
+  "emotional_awareness": {
+    "type": "object",
+    "required": ["emotions", "body_sensation", "triggers", "responses"],
+    "properties": {
+      "emotions": { "type": "string" },
+      "body_sensation": { "type": "string" },
+      "triggers": { "type": "string" },
+      "responses": { "type": "string" }
+    }
+  }
+}

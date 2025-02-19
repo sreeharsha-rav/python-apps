@@ -1,8 +1,8 @@
-from datetime import datetime
 from pathlib import Path
 import json
 from typing import List, Dict
 from journal_bot.core.journal_entry import JournalEntry
+
 
 class JsonStorage:
     def __init__(self):
@@ -13,7 +13,7 @@ class JsonStorage:
         """Save a journal entry to JSON file"""
         date_str = entry.date.strftime("%Y-%m-%d_%H-%M-%S")
         file_path = self.base_path / f"entry_{date_str}.json"
-        
+
         with open(file_path, "w") as f:
             json.dump(entry.model_dump(), f, indent=2, default=str)
 

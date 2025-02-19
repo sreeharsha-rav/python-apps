@@ -1,7 +1,8 @@
 from datetime import datetime
-from typing import Dict, Optional
+from typing import Dict
 
 from pydantic import BaseModel, Field
+
 
 class JournalEntry(BaseModel):
     date: datetime = Field(default_factory=datetime.now)
@@ -15,7 +16,7 @@ class JournalEntry(BaseModel):
                 "date": "2023-12-20T20:30:00Z",
                 "opening_reflection": {
                     "prompt": "In this moment, I notice...",
-                    "response": "a sense of calm and focus"
-                }
+                    "response": "a sense of calm and focus",
+                },
             }
         }

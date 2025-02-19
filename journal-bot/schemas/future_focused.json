@@ -1,0 +1,11 @@
+{
+  "future_focused": {
+    "type": "object",
+    "properties": {
+      "possibilities": { "type": "string" },
+      "next_steps": { "type": "string" },
+      "support_needed": { "type": "string" },
+      "aspirations": { "type": "string" }
+    }
+  }
+}

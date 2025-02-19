@@ -1,0 +1,17 @@
+{
+  "growth_reflection": {
+    "type": "object",
+    "required": [
+      "challenges",
+      "learnings",
+      "growth_opportunities",
+      "future_approaches"
+    ],
+    "properties": {
+      "challenges": { "type": "string" },
+      "learnings": { "type": "string" },
+      "growth_opportunities": { "type": "string" },
+      "future_approaches": { "type": "string" }
+    }
+  }
+}

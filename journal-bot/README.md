@@ -14,7 +14,7 @@ I based this tool on the [**Journal Framework**](journal_framework.md) I researc
 
 ### Prerequisites
 
-- Python 3.6 or higher
+- Python 3.12
 - Poetry
 
 ### Installation
