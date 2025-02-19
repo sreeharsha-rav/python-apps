@@ -30,7 +30,7 @@ class ThoughtsManager:
         Returns:
             Thought: The newly created thought object
         """
-        now = datetime.now()
+        now = datetime.now().replace(microsecond=0)
         date = now.date().isoformat()
         
         daily_thoughts = self.get_thoughts_for_date(date) or DailyThoughts(

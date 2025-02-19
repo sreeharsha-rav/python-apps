@@ -43,7 +43,7 @@ def list(date: str | None):
         date (str, optional): Date to list thoughts for. Defaults to today.
     """
     if date is None:
-        date = datetime.utcnow().date().isoformat()
+        date = datetime.now().date().isoformat()
     
     try:
         daily_thoughts = manager.get_thoughts_for_date(date)
