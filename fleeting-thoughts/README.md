@@ -36,3 +36,22 @@ poetry run thoughts list-all
 ```
 
 The thoughts are stored in a JSON file at `./entries/` folder by the date.
+
+### Running tests
+
+```bash
+# Run all tests
+poetry run pytest
+
+# Run tests with coverage report
+poetry run pytest --cov=fleeting_thoughts
+
+# Run tests verbosely
+poetry run pytest -v
+
+# Run a specific test file
+poetry run pytest tests/test_models.py
+
+# Run tests and generate HTML coverage report
+poetry run pytest --cov=fleeting_thoughts --cov-report=html
+```

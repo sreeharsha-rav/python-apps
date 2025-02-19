@@ -21,3 +21,9 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 thoughts = "fleeting_thoughts.cli:cli"
+tests = "fleeting_thoughts.cli:tests"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+pytest-cov = "^6.0.0"
+
