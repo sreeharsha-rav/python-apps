@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Learning Journal",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date in YYYY-MM-DD format"
+    },
+    "learnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "Brief topic or context"
+          },
+          "insight": {
+            "type": "string",
+            "description": "What was learned"
+          },
+          "connection": {
+            "type": "string",
+            "description": "How it connects to existing knowledge or how to apply it"
+          }
+        },
+        "required": ["topic", "insight"]
+      }
+    },
+    "reflection": {
+      "type": "object",
+      "properties": {
+        "keyTakeaways": {
+          "type": "string",
+          "description": "Main learnings and insights from the day"
+        },
+        "actionItems": {
+          "type": "string",
+          "description": "Next steps or areas to explore further"
+        }
+      },
+      "required": ["keyTakeaways", "actionItems"]
+    }
+  },
+  "required": ["date", "learnings", "reflection"]
+}
