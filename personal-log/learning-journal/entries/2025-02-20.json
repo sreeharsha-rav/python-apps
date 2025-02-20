@@ -1,0 +1,10 @@
+{
+  "date": "2025-02-20",
+  "learnings": [
+    {
+      "topic": "python click interface",
+      "insight": "I learnt about commands using click, still found some weird bugs to work around",
+      "connection": "building terminal user interfaces"
+    }
+  ]
+}

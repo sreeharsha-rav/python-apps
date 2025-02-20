@@ -13,7 +13,7 @@ from .models import DailyThoughts
 class JsonStorage:
     """Handles JSON file storage operations for thoughts."""
 
-    def __init__(self, storage_dir: str = "./thoughts"):
+    def __init__(self, storage_dir: str = "./entries"):
         """Initialize the JSON storage.
 
         Args:

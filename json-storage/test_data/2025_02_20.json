@@ -1,0 +1,14 @@
+{
+  "user": "John Doe",
+  "settings": {
+    "theme": "light",
+    "notifications": true
+  },
+  "scores": [
+    85,
+    90,
+    78,
+    95
+  ],
+  "status": "active"
+}
