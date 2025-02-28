@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Learning Journal",
+  "description": "Learnings throughout the day",
+  "type": "object",
+  "properties": {
+    "learnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "Brief topic or context"
+          },
+          "insight": {
+            "type": "string",
+            "description": "What was learned"
+          },
+          "connection": {
+            "type": "string",
+            "description": "How it connects to existing knowledge or how to apply it"
+          }
+        },
+        "required": ["topic", "insight"]
+      }
+    }
+  },
+  "required": ["date", "learnings"]
+}

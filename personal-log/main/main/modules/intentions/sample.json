@@ -1,0 +1,27 @@
+{
+  "intentions": {
+    "longTermGoals": [
+      "Build a sustainable online business",
+      "Publish a book on personal development"
+    ],
+    "shortTermGoals": [
+      "Publish four articles a week",
+      "Increase website traffic by 20%"
+    ],
+    "affirmation": "I am grateful for the opportunities that come my way and I embrace them with an open heart."
+  },
+  "priorities": [
+    {
+      "task": "Complete the first draft of Article X",
+      "alignment": "Aligns with short-term goal of publishing four articles a week"
+    },
+    {
+      "task": "Optimize website SEO",
+      "alignment": "Supports long-term goal of building a sustainable online business"
+    },
+    {
+      "task": "Engage with audience on social media",
+      "alignment": "Contributes to increasing website traffic"
+    }
+  ]
+}

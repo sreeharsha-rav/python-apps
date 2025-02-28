@@ -1,0 +1,19 @@
+{
+  "learnings": [
+    {
+      "topic": "React Performance",
+      "insight": "useMemo can prevent expensive calculations from re-running on every render",
+      "connection": "This will help optimize the data visualization component I'm working on"
+    },
+    {
+      "topic": "Team Communication",
+      "insight": "Starting messages with context helps remote team members understand requests better",
+      "connection": "Will use this in Slack channels to reduce back-and-forth questions"
+    },
+    {
+      "topic": "Productivity",
+      "insight": "Taking breaks every 90 minutes aligns with natural energy cycles",
+      "connection": "Can structure deep work sessions around this rhythm"
+    }
+  ]
+}

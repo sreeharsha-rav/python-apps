@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Daily Reflection",
+  "description": "Reflect on various aspects of the day",
+  "type": "object",
+  "properties": {
+    "reflection": {
+      "type": "object",
+      "properties": {
+        "thoughts_reflections": {
+          "type": "string",
+          "description": "Brief summary of fleeting thoughts and observations"
+        },
+        "learning_reflections": {
+          "type": "object",
+          "properties": {
+            "keyTakeaways": {
+              "type": "array",
+              "description": "Main learnings and insights from the day",
+              "items": {
+                "type": "string",
+                "description": "Key takeaway or insight 1"
+              }
+            },
+            "actionItems": {
+              "type": "array",
+              "description": "Actionable items or next steps",
+              "items": {
+                "type": "string",
+                "description": "Action item 1"
+              }
+            }
+          },
+          "required": ["keyTakeaways", "actionItems"]
+        }
+      }
+    }
+  },
+  "required": ["date", "reflection"]
+}

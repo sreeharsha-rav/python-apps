@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Daily Fleeting Thoughts",
+  "description": "Capture fleeting thoughts throughout the day",
+  "type": "object",
+  "properties": {
+    "thoughts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The fleeting thought content"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the thought was recorded"
+          }
+        },
+        "required": ["content", "timestamp"]
+      }
+    }
+  },
+  "required": ["date", "thoughts"]
+}
