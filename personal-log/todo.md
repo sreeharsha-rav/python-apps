@@ -1,29 +1,29 @@
 # TODOs
 
-- add tests for all modules with service, JSONFileManager, make it more robust with error handling as well
-- Integrate with LLamaIndex for querying using query engine modules
-- Add support for context-based querying
-- Add support for summarization of thoughts with knowledge
+## JSON File Storage
 
-## Key Features
+- [x] Implement JSONFileManager for reading and writing JSON files
+- [x] Implement JSONFileManager for loading and saving JSON files
+- [x] Implement additional methods for JSONFileManager for update, append, and delete
+- [ ] Add tests for JSONFileManager mock
+- [ ] Improve error handling and atomic writes for JSONFileManager for better data integrity
 
-**LlamaIndex Integration**
+## Log Modules
 
-- Uses vector store indexing for efficient semantic search
-- Maintains persistent index storage
-- Custom prompt templates for personal thought analysis
-- Automatic JSON parsing and document loading
+- [x] Create pydantic models for log entries with `thoughts`, `learnings`, `intentions`, and `reflections`
+- [x] Implement service modules for interacting with log entries
+- [x] Implement service modules for creating, reading, updating, and deleting log entries
+- [ ] Add tests for all modules with service mocks
+- [ ] Improve error handling and logging with service-specific errors
 
-**Query Capabilities**
+## CLI Interface
 
-- Natural language querying of thoughts
-- Semantic search across all stored thoughts
-- Contextual analysis and summarization
-- Index refreshing for updated content
+- [ ] Implement CLI interface for user interaction
+- [ ] Add support for user input and output
+- [ ] Add support for user commands and queries
 
-This implementation allows you to:
+## AI Integration
 
-- Semantically search through your thoughts
-- Get summaries and insights
-- Identify patterns and themes
-- Ask questions about your recorded thoughts
+- [ ] Integrate with LLamaIndex for querying using query engine modules
+- [ ] Add support for context-based querying
+- [ ] Add support for summarization of thoughts with knowledge

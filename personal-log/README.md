@@ -35,6 +35,29 @@ This is a modular personal log system that can be used to keep track of your dai
 - **JSON Format**: The log entries are stored in JSON format, which is easy to read and write, and can be easily processed by other programs.
 - **Command-Line Interface**: The log can be accessed and edited using a simple command-line interface, which makes it easy to add new entries or search for existing ones.
 
+### Additional Upcoming Features
+
+**LlamaIndex Integration**
+
+- Uses vector store indexing for efficient semantic search
+- Maintains persistent index storage
+- Custom prompt templates for personal thought analysis
+- Automatic JSON parsing and document loading
+
+**Query Capabilities**
+
+- Natural language querying of thoughts
+- Semantic search across all stored thoughts
+- Contextual analysis and summarization
+- Index refreshing for updated content
+
+This implementation allows you to:
+
+- Semantically search through your thoughts
+- Get summaries and insights
+- Identify patterns and themes
+- Ask questions about your recorded thoughts
+
 ## Getting Started
 
 ### Prerequisites
