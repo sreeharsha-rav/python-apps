@@ -18,9 +18,8 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 main = "main.main:main"
-format = "poetry run black main tests && poetry run ruff format main tests"
-lint = "poetry run ruff check main tests"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.9.9"
 black = "^25.1.0"
+pytest = "^8.3.4"

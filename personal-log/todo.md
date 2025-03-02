@@ -5,8 +5,9 @@
 - [x] Implement JSONFileManager for reading and writing JSON files
 - [x] Implement JSONFileManager for loading and saving JSON files
 - [x] Implement additional methods for JSONFileManager for update, append, and delete
-- [ ] Add tests for JSONFileManager mock
-- [ ] Improve error handling and atomic writes for JSONFileManager for better data integrity
+- [x] Add tests for JSONFileManager mock
+- [x] Improve error handling for JSONFileManager for better data integrity
+- [ ] Implement better atomic file operations for JSONFileManager with backup and restore
 
 ## Log Modules
 
