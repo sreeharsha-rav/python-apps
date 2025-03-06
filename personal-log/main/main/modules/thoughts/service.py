@@ -10,7 +10,8 @@ class ThoughtsService:
     KEY = "fleeting_thoughts"
     
     def __init__(self, file_manager: JSONFileManager):
-        """Initialize the service with a file manager
+        """
+        Initialize the service with a file manager
         
         Args:
             file_manager (JSONFileManager): JSON file manager for storage operations
@@ -18,7 +19,8 @@ class ThoughtsService:
         self.file_manager = file_manager
     
     def get_thoughts(self, entry_date: Optional[date] = None) -> Thoughts:
-        """Get thoughts for a specific date
+        """
+        Get thoughts for a specific date
         
         Args:
             entry_date (date, optional): Date to retrieve thoughts for. Defaults to current date.
@@ -33,7 +35,8 @@ class ThoughtsService:
         return Thoughts.model_validate(data[self.KEY])
     
     def add_thought(self, thought: Thought, entry_date: Optional[date] = None) -> None:
-        """Add a single thought to the specified date
+        """
+        Add a single thought to the specified date
         
         Args:
             thought (Thought): Thought to add
@@ -56,7 +59,8 @@ class ThoughtsService:
         self.file_manager.write_data(data, entry_date)
     
     def save_thoughts(self, thoughts: Thoughts, entry_date: Optional[date] = None) -> None:
-        """Save all thoughts for a date
+        """
+        Save all thoughts for a date
         
         Args:
             thoughts (Thoughts): Thoughts to save

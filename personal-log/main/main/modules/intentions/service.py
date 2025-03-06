@@ -1,7 +1,7 @@
 from datetime import date
-from typing import Optional, List
+from typing import Optional
 
-from main.modules.intentions.model import DailyIntentions, Intentions, Priority
+from main.modules.intentions.model import DailyIntentions
 from main.storage.json_file_manager import JSONFileManager
 
 class IntentionsService:
@@ -10,7 +10,8 @@ class IntentionsService:
     KEY = "daily_intentions"
     
     def __init__(self, file_manager: JSONFileManager):
-        """Initialize the service with a file manager
+        """
+        Initialize the service with a file manager
         
         Args:
             file_manager (JSONFileManager): JSON file manager for storage operations
@@ -18,7 +19,8 @@ class IntentionsService:
         self.file_manager = file_manager
     
     def get_daily_intentions(self, entry_date: Optional[date] = None) -> Optional[DailyIntentions]:
-        """Get daily intentions for a specific date
+        """
+        Get daily intentions for a specific date
         
         Args:
             entry_date (date, optional): Date to retrieve intentions for. Defaults to current date.
@@ -33,7 +35,8 @@ class IntentionsService:
         return DailyIntentions.model_validate(data[self.KEY])
     
     def save_daily_intentions(self, daily_intentions: DailyIntentions, entry_date: Optional[date] = None) -> None:
-        """Save daily intentions for a date
+        """
+        Save daily intentions for a date
         
         Args:
             daily_intentions (DailyIntentions): Intentions to save
@@ -44,7 +47,8 @@ class IntentionsService:
         self.file_manager.write_data(data, entry_date)
     
     def update_affirmation(self, affirmation: str, entry_date: Optional[date] = None) -> None:
-        """Update just the affirmation in the daily intentions
+        """
+        Update just the affirmation in the daily intentions
         
         Args:
             affirmation (str): New affirmation text

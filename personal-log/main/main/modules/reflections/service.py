@@ -10,7 +10,8 @@ class ReflectionsService:
     KEY = "reflections"
     
     def __init__(self, file_manager: JSONFileManager):
-        """Initialize the service with a file manager
+        """
+        Initialize the service with a file manager
         
         Args:
             file_manager (JSONFileManager): JSON file manager for storage operations
@@ -18,7 +19,8 @@ class ReflectionsService:
         self.file_manager = file_manager
     
     def get_reflection(self, entry_date: Optional[date] = None) -> Optional[Reflection]:
-        """Get reflection for a specific date
+        """
+        Get reflection for a specific date
         
         Args:
             entry_date (date, optional): Date to retrieve reflection for. Defaults to current date.
@@ -33,7 +35,8 @@ class ReflectionsService:
         return Reflection.model_validate(data[self.KEY])
     
     def save_reflection(self, reflection: Reflection, entry_date: Optional[date] = None) -> None:
-        """Save reflection for a date
+        """
+        Save reflection for a date
         
         Args:
             reflection (Reflection): Reflection to save
@@ -51,7 +54,8 @@ class ReflectionsService:
         self.file_manager.write_data(data, entry_date)
     
     def update_thoughts_reflection(self, reflection_text: str, entry_date: Optional[date] = None) -> None:
-        """Update just the thoughts reflection component
+        """
+        Update just the thoughts reflection component
         
         Args:
             reflection_text (str): New reflection text
@@ -66,7 +70,8 @@ class ReflectionsService:
         self.save_reflection(reflection, entry_date)
     
     def update_learning_reflection(self, key_takeaways: List[str], action_items: List[str], entry_date: Optional[date] = None) -> None:
-        """Update the learning reflection component
+        """
+        Update the learning reflection component
         
         Args:
             key_takeaways (List[str]): List of main learnings and insights
@@ -87,7 +92,8 @@ class ReflectionsService:
         self.save_reflection(reflection, entry_date)
     
     def add_key_takeaway(self, takeaway: str, entry_date: Optional[date] = None) -> None:
-        """Add a single key takeaway to the learning reflection
+        """
+        Add a single key takeaway to the learning reflection
         
         Args:
             takeaway (str): Key takeaway to add
@@ -109,7 +115,8 @@ class ReflectionsService:
         self.save_reflection(reflection, entry_date)
     
     def add_action_item(self, action: str, entry_date: Optional[date] = None) -> None:
-        """Add a single action item to the learning reflection
+        """
+        Add a single action item to the learning reflection
         
         Args:
             action (str): Action item to add

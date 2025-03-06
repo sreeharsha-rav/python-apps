@@ -10,7 +10,8 @@ class LearningsService:
     KEY = "learnings"
     
     def __init__(self, file_manager: JSONFileManager):
-        """Initialize the service with a file manager
+        """
+        Initialize the service with a file manager
         
         Args:
             file_manager (JSONFileManager): JSON file manager for storage operations
@@ -18,7 +19,8 @@ class LearningsService:
         self.file_manager = file_manager
     
     def get_learnings(self, entry_date: Optional[date] = None) -> LearningEntry:
-        """Get learnings for a specific date
+        """
+        Get learnings for a specific date
         
         Args:
             entry_date (date, optional): Date to retrieve learnings for. Defaults to current date.
@@ -33,7 +35,8 @@ class LearningsService:
         return LearningEntry.model_validate(data[self.KEY])
     
     def add_learning(self, learning: Learning, entry_date: Optional[date] = None) -> None:
-        """Add a single learning to the specified date
+        """
+        Add a single learning to the specified date
         
         Args:
             learning (Learning): Learning to add
@@ -51,7 +54,8 @@ class LearningsService:
         self.file_manager.write_data(data, entry_date)
     
     def save_learnings(self, learnings: LearningEntry, entry_date: Optional[date] = None) -> None:
-        """Save all learnings for a date
+        """
+        Save all learnings for a date
         
         Args:
             learnings (LearningEntry): Learnings to save

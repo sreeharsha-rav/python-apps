@@ -1,0 +1,78 @@
+{
+  "fleeting_thoughts": {
+    "thoughts": [
+      {
+        "content": "Wrote down a CLI interface for all modules using claude, pretty good, testing it out",
+        "timestamp": "2025-03-06T19:17:56.863149"
+      },
+      {
+        "content": "this is another thought, testing it out",
+        "timestamp": "2025-03-06T19:19:06.647516"
+      },
+      {
+        "content": "I just came back from gym and am trying to fix journal CLI view, facing a weird issue",
+        "timestamp": "2025-03-06T22:47:18.725779"
+      },
+      {
+        "content": "So, I will work on fixing the journal cli later for the comprehensive view, cool thing is I got a calendar view and stats view, pretty good",
+        "timestamp": "2025-03-06T23:14:19.491812"
+      }
+    ]
+  },
+  "daily_intentions": {
+    "intentions": {
+      "long_term_goals": [
+        "Become a great 10x engineer",
+        "Become financially independent where my passive income > active income",
+        "Bring value to society in a positive direction"
+      ],
+      "short_term_goals": [
+        "Get a job and start working as a software engineer",
+        "Setup a daily consistent routine and keep consistent with it",
+        "Develop communication skills through Toastmasters and reading books"
+      ],
+      "affirmation": "I am capable of doing anything I put my mind to with realistic optimism"
+    },
+    "priorities": [
+      {
+        "task": "Apply to at least 5 companies",
+        "alignment": "Get a software engineering job"
+      },
+      {
+        "task": "Practice at least 3 leetcode problems",
+        "alignment": "Be a 10x engineer"
+      },
+      {
+        "task": "Read a book before going to sleep",
+        "alignment": "Become a better communicator"
+      }
+    ]
+  },
+  "learnings": {
+    "learnings": [
+      {
+        "topic": "awareness through vipassana meditation",
+        "insight": "i live everyday just randomly according to the whims of my thoughts, but that randomness is a part of me and I think accepting that and looking beyond it, by learning from it like using it as manure to grow a plant in my mind is the key to my growth now",
+        "connection": null
+      },
+      {
+        "topic": "failure, regrets and disappointment",
+        "insight": "Failure, regrets and disappointments help in setting up future direction to not repeat the same mistake and I am leaning into that",
+        "connection": "related to my failure and disappointment of unrealised dreams, expectations from NITK and ASU"
+      }
+    ]
+  },
+  "reflections": {
+    "thoughts_reflections": "alright, not too happy, but pretty stoked about building a CLI personal log",
+    "learning_reflections": {
+      "keyTakeaways": [
+        "going to gym gives me mental piece and a sense of clarity, similarly with vipassana meditation as well",
+        "I'm really not sure what to do once I get a sense of clarity, my default reaction is to just default to my old self-sabotage thoughtless behaviors"
+      ],
+      "actionItems": [
+        "I will need to focus and clearly map out what can I do with much more mental clarity from gym, meditation",
+        "keep fixed time around 1-2hours to learn daily"
+      ]
+    }
+  }
+}
