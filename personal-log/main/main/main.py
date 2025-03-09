@@ -3,10 +3,10 @@ from rich.console import Console
 from rich.panel import Panel
 
 # Import CLI modules
-from main.cli.thoughts_cli import thoughts
-from main.cli.reflections_cli import reflections
-from main.cli.intentions_cli import intentions
-from main.cli.learnings_cli import learnings
+from main.modules.thoughts.thoughts_cli import thoughts
+from main.modules.reflections.reflections_cli import reflections
+from main.modules.intentions.intentions_cli import intentions
+from main.modules.learnings.learnings_cli import learnings
 from main.cli.journal_cli import journal  # Import the new journal command
 
 console = Console()

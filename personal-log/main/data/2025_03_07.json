@@ -1,0 +1,39 @@
+{
+  "daily_intentions": {
+    "intentions": {
+      "long_term_goals": [
+        "become financially independent, passive income > active income",
+        "become a valuable 10x engineer",
+        "become a great Dad, a value addition to soceity in a positive way"
+      ],
+      "short_term_goals": [
+        "get a good paying job",
+        "have a consistent daily routine",
+        "make a habit of reading books"
+      ],
+      "affirmation": "I am capable of doing anything I put my mind to, it's just a matter of facing the unknown and learning from it"
+    },
+    "priorities": [
+      {
+        "task": "complete Xperio translate feature",
+        "alignment": "become a 10x engineer"
+      },
+      {
+        "task": "solve at least 3 leetcode problems",
+        "alignment": "become a 10x engineer"
+      },
+      {
+        "task": "read a book before going to sleep",
+        "alignment": "become a great Dad"
+      }
+    ]
+  },
+  "fleeting_thoughts": {
+    "thoughts": [
+      {
+        "content": "I'll never take Dad's words seriously at all, because Dad does not know how to communicate properly to a son, and that's fine, but I will not be like that. Just finished dinner, gone to gym, did back day, really like Shans_bruh influencer content, dumb stupid lol.",
+        "timestamp": "2025-03-07T20:40:15.452046"
+      }
+    ]
+  }
+}

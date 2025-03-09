@@ -19,9 +19,9 @@
 
 ## CLI Interface
 
-- [ ] Implement CLI interface for user interaction
-- [ ] Add support for user input and output
-- [ ] Add support for user commands and queries
+- [x] Implement CLI interface for user interaction
+- [x] Add support for user input and output
+- [x] Add support for user commands and queries
 
 ## AI Integration
 

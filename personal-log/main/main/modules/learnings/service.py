@@ -7,7 +7,7 @@ from main.storage.json_file_manager import JSONFileManager
 class LearningsService:
     """Service for managing learning entries"""
     
-    KEY = "learnings"
+    KEY = "daily_learnings"
     
     def __init__(self, file_manager: JSONFileManager):
         """
