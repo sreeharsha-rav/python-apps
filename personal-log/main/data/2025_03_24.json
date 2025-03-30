@@ -1,0 +1,31 @@
+{
+  "daily_intentions": {
+    "intentions": {
+      "long_term_goals": [
+        "become a 10x engineer",
+        "become financially independent",
+        "become a good leader, taking up responsibility, well read, eloquent communication skills"
+      ],
+      "short_term_goals": [
+        "establish a clear journalling routine: daily, weekly, monthly",
+        "establish a healthy living routine: eat healthy, exercise, diet, meditation, capping social media, sleep good, healthy socializing",
+        "start reading books from kindle for at least 5 mins daily: stop social media 2 hours before sleep"
+      ],
+      "affirmation": "I am capable of doing anything I set my mind to, optimistically realistic"
+    },
+    "priorities": [
+      {
+        "task": "sleep early: avoid social media for 1-2 hrs before sleep, read a book before sleep",
+        "alignment": "become a good leader, healthy living, start reading books"
+      },
+      {
+        "task": "eat healthy, track calories, go to gym - chest day",
+        "alignment": "eastablish health"
+      },
+      {
+        "task": "journal and review before going to sleep",
+        "alignment": "establish a clear journalling routine"
+      }
+    ]
+  }
+}

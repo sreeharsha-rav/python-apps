@@ -1,0 +1,31 @@
+{
+  "daily_intentions": {
+    "intentions": {
+      "long_term_goals": [
+        "Become a 10x engineer",
+        "Become financially independent",
+        "Become well read and eloquent in speaking"
+      ],
+      "short_term_goals": [
+        "Establish a consistent daily routine",
+        "toastmasters speaker",
+        "daily reading, improvement"
+      ],
+      "affirmation": "Krishna is the charioteer of the horses, I trust in Krishna"
+    },
+    "priorities": [
+      {
+        "task": "Spurtree onboarding",
+        "alignment": "become a 10x engineer"
+      },
+      {
+        "task": "setup a vision board, concrete goals and a roadmap for the week, month, year",
+        "alignment": "establish a daily consistent routine"
+      },
+      {
+        "task": "solve leetcode, practice interviewing",
+        "alignment": "become financially independent"
+      }
+    ]
+  }
+}

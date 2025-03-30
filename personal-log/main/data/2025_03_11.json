@@ -1,0 +1,43 @@
+{
+  "fleeting_thoughts": {
+    "thoughts": [
+      {
+        "content": "I did not get much sleep last night, woke up around 1.30am, had anxious dreams about work, fantasy about work with Girish and SpurTree, I guess the thing is that I am getting anxious and the anxious thoughts are flowing, which is a good thing. Also, I feel like I am getting so many unprocessed thoughts, which is samskara as explained by Dr K, will reference it to the video about the lecture series on Ego for members, pretty cool. Alright, but I have thoughts all over the place and am not able to make my mind.",
+        "timestamp": "2025-03-11T05:21:16.499358"
+      },
+      {
+        "content": "Even though my thoughts are all over the place, I think that as long as I keep doing what I need to do, I will be alright. Currently, now I will set intentions for the day and go to the gym. I really think that I am getting many anxious thoughts because I failed to do gym yesterday, but it will be good today.",
+        "timestamp": "2025-03-11T05:23:02.236337"
+      }
+    ]
+  },
+  "daily_intentions": {
+    "intentions": {
+      "long_term_goals": [
+        "become a 10x engineer",
+        "become financially independent",
+        "become a well-read person with eloquent speaking skills, ready to make an impact in the world"
+      ],
+      "short_term_goals": [
+        "establish a solid daily consistent routine with gym workout, learning, personal deevelopment and work",
+        "start contributing to an open source project in python with AI, LLMs",
+        "establish a daily reading habit and start practicing communication skills starting with Toastmasters"
+      ],
+      "affirmation": "Even though I am anxious, thoughts all over the place, I have hope and I have faith that whatever I put efforts into now will compound later in the future!"
+    },
+    "priorities": [
+      {
+        "task": "establish clear priorities, work time commitments with respect to Udemy learning, Jira contribution, coding at SpurTree",
+        "alignment": "become a 10x engineer"
+      },
+      {
+        "task": "work on personal_log project, do some leetcode and apply to jobs",
+        "alignment": "establishing a solid daily routine"
+      },
+      {
+        "task": "Continue reading Frankenstein, at least spend 10-15mins today before bed",
+        "alignment": "become well-read"
+      }
+    ]
+  }
+}

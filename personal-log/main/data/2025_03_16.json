@@ -1,0 +1,31 @@
+{
+  "daily_intentions": {
+    "intentions": {
+      "long_term_goals": [
+        "become a 10x engineer",
+        "become financially independent",
+        "become good leader, well-read, effective communicator"
+      ],
+      "short_term_goals": [
+        "establish a solid daily routine",
+        "live healthy, eat healthy, exercise, be socially healthy",
+        "practice coding, be curious about learning and learn daily"
+      ],
+      "affirmation": "I recognize the pain inside me,yet with compassionate inquiry I am mindful and will take care of my mind"
+    },
+    "priorities": [
+      {
+        "task": "clean room, setup clothes, setup week goals, review",
+        "alignment": "become a good leader"
+      },
+      {
+        "task": "learn about Azure AI, learn on Udemy",
+        "alignment": "become a 10x engineer"
+      },
+      {
+        "task": "exercise, eat healthy, avoid social media 2hrs before bed and read before sleeping",
+        "alignment": "live healthy, eat healthy, exercise"
+      }
+    ]
+  }
+}

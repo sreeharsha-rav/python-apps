@@ -1,0 +1,31 @@
+{
+  "daily_intentions": {
+    "intentions": {
+      "long_term_goals": [
+        "Become a 10x engineer in software development",
+        "Become financially independent",
+        "Become a well-read person with great communication skills"
+      ],
+      "short_term_goals": [
+        "Establish a solid daily reproducible routine",
+        "Start contributing to Open-Source projects using LLMs, Python FastAPI",
+        "Establish a daily reading habit and start going to Toastmasters"
+      ],
+      "affirmation": "The best opportunity lies in failure"
+    },
+    "priorities": [
+      {
+        "task": "Establish clear communication with backend team",
+        "alignment": "become a 10x engineer"
+      },
+      {
+        "task": "Setup tasks to solve for myself",
+        "alignment": "become a 10x engineer"
+      },
+      {
+        "task": "Continue working on my personal_log",
+        "alignment": "become a 10x engineer"
+      }
+    ]
+  }
+}
