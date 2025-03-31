@@ -2,9 +2,9 @@ from typing import Dict, List
 from src.llm.models.base_llm import BaseLLM
 from src.schemas.llm import ModelInfo, ModelID
 from src.utils.decorators import singleton
-from models.openai_gpt4o_mini import OpenAIGPT4oMini
-from models.azure_gpt4o_mini import AzureGPT4oMini
-from models.google_gemini2_flash import GoogleGemini2Flash
+from src.llm.models.azure_gpt4o_mini import AzureGPT4oMini
+from src.llm.models.google_gemini2_flash import GoogleGemini2Flash
+from src.llm.models.openai_gpt4o_mini import OpenAIGPT4oMini
 from src.exceptions.llm import ModelNotFoundError
 
 @singleton
@@ -18,7 +18,7 @@ class LLMRegistry:
     }
 
     def list_models(self) -> List[ModelInfo]:
-        """List all available models with their information"""
+        """List all available models"""
         return [model.MODEL_INFO for model in self._models.values()]
 
     def get_model_info(self, model_id: str) -> ModelInfo:
@@ -33,18 +33,7 @@ class LLMRegistry:
             )
 
     def get_model(self, model_id: str) -> BaseLLM:
-        """
-        Get the LLM instance for the specified model_id
-
-        Args:
-            model_id: The ID of the model to retrieve
-
-        Returns:
-            An instance of the specified LLM
-
-        Raises:
-            ModelNotFoundError: If the model_id is not found or invalid
-        """
+        """Get the LLM instance for the specified model_id"""
         try:
             model_enum = ModelID(model_id)
             return self._models[model_enum]

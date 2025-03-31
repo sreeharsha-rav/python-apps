@@ -1,0 +1,40 @@
+# Version control
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+*.egg*
+.env
+.venv
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test
+tests/
+test/
+coverage/
+.coverage
+.pytest_cache/
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Development
+*.log
+.env*
+!.env.example

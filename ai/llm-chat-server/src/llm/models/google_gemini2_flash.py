@@ -1,10 +1,11 @@
-from base_llm import BaseLLM
+from src.llm.models.base_llm import BaseLLM
 from src.schemas.llm import ModelInfo, ModelID
+from src.schemas.chat import Role, Message, AssistantMessage
 from src.utils.decorators import singleton
+from src.config.settings import settings
 from src.exceptions.llm  import ConfigurationError, ClientInitializationError, GenerateCompletionError
-from typing import ClassVar
-from google.genai import Client
-import os
+from typing import ClassVar, List
+from google.genai import Client, types
 
 @singleton
 class GoogleGemini2Flash(BaseLLM):
@@ -24,32 +25,48 @@ class GoogleGemini2Flash(BaseLLM):
             super().__init__()
             
             # Validate required environment variables
-            self.model = os.getenv("GOOGLE_GEMINI2_FLASH_MODEL")
+            self.model = settings.GOOGLE_GEMINI2_FLASH_MODEL
             
             if not self.model:
                 raise ConfigurationError("GOOGLE_GEMINI2_FLASH_MODEL environment variable is not set")
             
             try:
                 self.client = Client(
-                    vertexai=os.getenv("GOOGLE_GENAI_USE_VERTEXAI"),
-                    project=os.getenv("GOOGLE_CLOUD_PROJECT"),
-                    location=os.getenv("GOOGLE_CLOUD_LOCATION"),
+                    vertexai=settings.GOOGLE_GENAI_USE_VERTEXAI,
+                    project=settings.GOOGLE_CLOUD_PROJECT,
+                    location=settings.GOOGLE_CLOUD_LOCATION
                 )
             except Exception as e:
                 raise ClientInitializationError(f"Failed to initialize Google Gemini client: {str(e)}")
                 
             self._initialized = True
 
-    async def get_completion(self, message: str) -> str:
+    async def get_completion(self, messages: List[Message]) -> AssistantMessage:
         """Get completion from Google Gemini 2.0 Flash model"""
-        if not message.strip():
-            raise ConfigurationError("Message cannot be empty")
-            
         try:
+            # format messages for Gemini
+            chat_history = [
+                types.Content(
+                    role=("user" if message.role == Role.USER else "model"),
+                    parts=[
+                        types.Part(
+                            text=message.content
+                        )
+                    ]
+                ) for message in messages
+            ]
+
             response = self.client.models.generate_content(
                 model=self.model,
-                contents=message,
+                config=types.GenerateContentConfig(
+                    system_instruction="You are a helpful assistant."
+                ),
+                contents=chat_history
             )
-            return response.text
+
+            return AssistantMessage(
+                role=Role.ASSISTANT,
+                content=response.text
+            )
         except Exception as e:
             raise GenerateCompletionError(f"Failed to get completion: {str(e)}")

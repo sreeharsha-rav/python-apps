@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import ClassVar
 from src.schemas.llm import ModelInfo
+from src.schemas.chat import Message, AssistantMessage
+from typing import List
 
 class BaseLLM(ABC):
     """Base class for LLM implementations"""
@@ -12,14 +14,6 @@ class BaseLLM(ABC):
         pass
 
     @abstractmethod
-    async def get_completion(self, message: str) -> str:
-        """
-        Get completion from LLM
-        
-        Args:
-            message: The input message to process
-            
-        Returns:
-            The model's response
-        """
+    async def get_completion(self, messages: List[Message]) -> AssistantMessage:
+        """Get completion from LLM"""
         pass

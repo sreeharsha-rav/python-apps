@@ -11,6 +11,9 @@ __pycache__/
 *.pyo
 *.pyd
 *.pdb
+.pytest_cache/
+.coverage
+htmlcov/
 
 # ignore IDE files
 .idea/
