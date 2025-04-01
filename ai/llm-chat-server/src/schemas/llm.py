@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 class ModelID(str, Enum):
     """Enum for supported model IDs"""
     AZURE_GPT4O_MINI = "azure_gpt-4o-mini"
+    AZURE_GPT4O = "azure_gpt-4o"
     GOOGLE_GEMINI2_FLASH = "google_gemini-2.0-flash"
     OPENAI_GPT4O_MINI = "openai_gpt-4o-mini"
 

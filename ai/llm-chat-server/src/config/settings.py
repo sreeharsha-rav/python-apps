@@ -7,12 +7,15 @@ class Settings(BaseSettings):
     AZURE_GPT4O_MINI_API_ENDPOINT: str = ""
     AZURE_GPT4O_MINI_API_VERSION: str = "2023-07-01-preview"
     AZURE_GPT4O_MINI_DEPLOYMENT: str = ""
+
+    AZURE_GPT4O_API_KEY: str = ""
+    AZURE_GPT4O_API_ENDPOINT: str = ""
+    AZURE_GPT4O_API_VERSION: str = "2023-07-01-preview"
+    AZURE_GPT4O_DEPLOYMENT: str = ""
     
     # Google Settings
     GOOGLE_GEMINI2_FLASH_MODEL: str = "gemini-2.0-flash-001"
-    GOOGLE_CLOUD_PROJECT: str = ""
-    GOOGLE_CLOUD_LOCATION: str = "us-central1"
-    GOOGLE_GENAI_USE_VERTEXAI: bool = True
+    GOOGLE_GEMINI2_FLASH_API_KEY: str = ""
     
     # OpenAI Settings
     OPENAI_API_KEY: str = ""

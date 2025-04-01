@@ -32,9 +32,7 @@ class GoogleGemini2Flash(BaseLLM):
             
             try:
                 self.client = Client(
-                    vertexai=settings.GOOGLE_GENAI_USE_VERTEXAI,
-                    project=settings.GOOGLE_CLOUD_PROJECT,
-                    location=settings.GOOGLE_CLOUD_LOCATION
+                    api_key=settings.GOOGLE_GEMINI2_FLASH_API_KEY,
                 )
             except Exception as e:
                 raise ClientInitializationError(f"Failed to initialize Google Gemini client: {str(e)}")

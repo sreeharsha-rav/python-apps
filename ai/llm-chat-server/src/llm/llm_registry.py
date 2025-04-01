@@ -3,6 +3,7 @@ from src.llm.models.base_llm import BaseLLM
 from src.schemas.llm import ModelInfo, ModelID
 from src.utils.decorators import singleton
 from src.llm.models.azure_gpt4o_mini import AzureGPT4oMini
+from src.llm.models.azure_gpt4o import AzureGPT4o
 from src.llm.models.google_gemini2_flash import GoogleGemini2Flash
 from src.llm.models.openai_gpt4o_mini import OpenAIGPT4oMini
 from src.exceptions.llm import ModelNotFoundError
@@ -13,6 +14,7 @@ class LLMRegistry:
     
     _models: Dict[ModelID, BaseLLM] = {
         ModelID.AZURE_GPT4O_MINI: AzureGPT4oMini(),
+        ModelID.AZURE_GPT4O: AzureGPT4o(),
         ModelID.GOOGLE_GEMINI2_FLASH: GoogleGemini2Flash(),
         ModelID.OPENAI_GPT4O_MINI: OpenAIGPT4oMini(),
     }
