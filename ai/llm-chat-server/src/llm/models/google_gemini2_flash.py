@@ -39,7 +39,7 @@ class GoogleGemini2Flash(BaseLLM):
                 
             self._initialized = True
 
-    async def get_completion(self, messages: List[Message]) -> AssistantMessage:
+    async def get_completion(self, system_instruction: str, messages: List[Message]) -> AssistantMessage:
         """Get completion from Google Gemini 2.0 Flash model"""
         try:
             # format messages for Gemini
@@ -57,7 +57,7 @@ class GoogleGemini2Flash(BaseLLM):
             response = self.client.models.generate_content(
                 model=self.model,
                 config=types.GenerateContentConfig(
-                    system_instruction="You are a helpful assistant."
+                    system_instruction=system_instruction
                 ),
                 contents=chat_history
             )

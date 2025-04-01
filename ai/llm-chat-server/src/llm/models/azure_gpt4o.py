@@ -51,11 +51,11 @@ class AzureGPT4o(BaseLLM):
 
             self._initialized = True
 
-    async def get_completion(self, messages: List[Message]) -> AssistantMessage:
+    async def get_completion(self, system_instruction: str, messages: List[Message]) -> AssistantMessage:
         """Get completion from Azure GPT-4o model"""
         try:
             formatted_messages = [
-                {"role": "system", "content": "You are a helpful assistant."}  # Add system message first
+                {"role": Role.SYSTEM, "content": system_instruction}  # Add system message first
             ]
             # Extend the list directly instead of using unpacking
             formatted_messages.extend(

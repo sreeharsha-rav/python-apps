@@ -21,6 +21,10 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: str = ""
     OPENAI_MODEL: str = "gpt-4o-mini"
 
+    # Search Settings
+    GOOGLE_CSE_ID: str = ""
+    GOOGLE_CSE_API_KEY: str = ""
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding='utf-8',

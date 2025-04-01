@@ -14,6 +14,6 @@ class BaseLLM(ABC):
         pass
 
     @abstractmethod
-    async def get_completion(self, messages: List[Message]) -> AssistantMessage:
+    async def get_completion(self, system_instruction: str, messages: List[Message]) -> AssistantMessage:
         """Get completion from LLM"""
         pass

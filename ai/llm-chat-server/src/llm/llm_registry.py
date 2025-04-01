@@ -34,7 +34,7 @@ class LLMRegistry:
                 f"Supported models: {[m.value for m in ModelID]}"
             )
 
-    def get_model(self, model_id: str) -> BaseLLM:
+    def get_model(self, model_id: ModelID) -> BaseLLM:
         """Get the LLM instance for the specified model_id"""
         try:
             model_enum = ModelID(model_id)
