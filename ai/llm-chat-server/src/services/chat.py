@@ -1,5 +1,5 @@
 from src.prompts.search import USE_SEARCH_RESULTS, USER_SEARCH_QUERY
-from src.schemas.chat import Chat, ChatRequest, ChatResponse, AssistantMessage, UserMessage, Role
+from src.schemas.chat import Chat, ChatRequest, ChatResponse, UserMessage, Role
 from src.schemas.search import WebRAGResponse
 from src.llm.models.base_llm import BaseLLM
 from src.llm.llm_registry import LLMRegistry
