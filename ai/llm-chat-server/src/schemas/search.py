@@ -1,5 +1,6 @@
 from enum import Enum
 from pydantic import BaseModel, Field
+from typing import Optional, List
 
 class SearchEngineID(str, Enum):
     """Enum for supported search engine IDs"""
@@ -30,6 +31,7 @@ class WebRAGResponse(BaseModel):
     """Response model for web search results"""
     search_performed: bool = Field(description="Indicates if web search was performed")
     search_query: str = Field(description="Original search query")
-    search_results: list[SearchResult] = Field(description="List of search results")
+    search_results: List[SearchResult] = Field(default=[], description="List of search result without AI summary")
+    formatted_results: str = Field(default="", description="Formatted search results ready for LLM consumption")
     total_results: int = Field(description="Total number of results found")
     engine_id: SearchEngineID = Field(description="ID of the search engine used")

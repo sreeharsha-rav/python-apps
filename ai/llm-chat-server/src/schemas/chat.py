@@ -115,14 +115,14 @@ class ChatResponse(BaseModel):
         default=ModelID.OPENAI_GPT4O_MINI,
         description="The model used for the chat completion"
     )
-    # web_search: bool = Field(
-    #     default=False,
-    #     description="Indicates if a web search was performed"
-    # )
-    # search_results: Optional[List[SearchResult]] = Field(
-    #     default=None,
-    #     description="The search results returned by the web search"
-    # )
+    web_search: bool = Field(
+        default=False,
+        description="Indicates if a web search was performed"
+    )
+    search_results: Optional[List[SearchResult]] = Field(
+        default=None,
+        description="The search results returned by the web search"
+    )
 
     class Config:
         """Configuration for ChatResponse model"""
@@ -134,18 +134,18 @@ class ChatResponse(BaseModel):
                     "content": "Latest advancements in AI include developments in natural language processing, computer vision, and reinforcement learning. For example, OpenAI's GPT-4 has shown significant improvements in understanding context and generating human-like text.",
                 },
                 "model_id": "openai_gpt-4o-mini",
-                # "web_search_performed": True,
-                # "search_results": [
-                #     {
-                #         "title": "Latest AI Advancements",
-                #         "url": "https://example.com/latest-ai-advancements",
-                #         "snippet": "Discover the latest advancements in AI, including breakthroughs in natural language processing and computer vision."
-                #     },
-                #     {
-                #         "title": "AI Research 2023",
-                #         "url": "https://example.com/ai-research-2023",
-                #         "snippet": "A comprehensive overview of AI research in 2023, highlighting key papers and findings."
-                #     }
-                # ]
+                "web_search": True,
+                "search_results": [
+                    {
+                        "title": "Latest AI Advancements",
+                        "url": "https://example.com/latest-ai-advancements",
+                        "snippet": "Discover the latest advancements in AI, including breakthroughs in natural language processing and computer vision."
+                    },
+                    {
+                        "title": "AI Research 2023",
+                        "url": "https://example.com/ai-research-2023",
+                        "snippet": "A comprehensive overview of AI research in 2023, highlighting key papers and findings."
+                    }
+                ]
             }
         }

@@ -186,6 +186,7 @@ class WebRAGService:
             search_performed=False,
             search_query=user_message.content,
             search_results=[],
+            formatted_results="",
             total_results=0,
             engine_id=engine_id
         )
@@ -216,9 +217,19 @@ class WebRAGService:
             )
             self.logger.info(f"AI-enhanced search results: {ai_search_results}")
 
+            # format ai_search_results as readable text
+            formatted_results = ""
+            for i, result in enumerate(ai_search_results, 1):
+                formatted_results += f"[Source {i}] {result.title}\n"
+                formatted_results += f"URL: {result.link}\n"
+                formatted_results += f"Summary: {result.summary}\n\n"
+
+            self.logger.info(f"Formatted results: {formatted_results}")
+
             # update rag response
             rag_response.search_performed = True
-            rag_response.search_results = ai_search_results
+            rag_response.search_results = search_results
+            rag_response.formatted_results = formatted_results
             rag_response.total_results = len(search_results)
         else:
             self.logger.info("Web search not needed.")

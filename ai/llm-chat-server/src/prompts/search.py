@@ -93,3 +93,13 @@ When using search results:
 
 If the user asks for information that is not available in your training data or the search results, you should inform them that you do not have access to that information and suggest they check a reliable source.
 """
+
+USER_SEARCH_QUERY = """
+Based on my question: {search_query}
+
+I found the following information from web searches:
+
+{formatted_results}
+
+Using the above information, please provide a comprehensive answer to my original question: {search_query}
+"""
