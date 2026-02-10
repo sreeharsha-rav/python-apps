@@ -21,10 +21,8 @@ class GoogleSearchAPI(BaseSearch):
     def __init__(self):
         if not hasattr(self, '_initialized'):
             super().__init__()
-
-            # Set up logging
             self.logger = logging.getLogger(__name__)
-
+            
             # Get credentials from settings
             self.api_key = settings.GOOGLE_CSE_API_KEY
             self.search_engine_id = settings.GOOGLE_CSE_ID
@@ -36,30 +34,16 @@ class GoogleSearchAPI(BaseSearch):
             if not self.search_engine_id:
                 raise SearchEngineConfigError("GOOGLE_CSE_ID environment variable is not set")
 
-            self.logger.info("Google Search API initialized successfully")
             self._initialized = True
 
     def search(self, query: str, num_results: int = 5) -> List[SearchResult]:
-        """
-        Fetches search results from Google Custom Search API.
-
-        Args:
-            query: The search query string
-            num_results: Number of results to return (max 10)
-
-        Returns:
-            List[SearchResult]: List of search results
-
-        Raises:
-            SearchQueryError: When the search query fails
-        """
-        self.logger.info(f"Performing Google search for query: {query[:100]}...")
-
+        self.logger.debug(f"Starting Google search with query: {query[:50]}...")
+        
         if not query:
             raise SearchQueryError("Search query cannot be empty")
 
-        # Ensure num_results doesn't exceed the max allowed
         num_results = min(num_results, self.ENGINE_INFO.max_results_per_query)
+        self.logger.debug(f"Requesting {num_results} results")
 
         params = {
             'q': query,
@@ -69,7 +53,7 @@ class GoogleSearchAPI(BaseSearch):
         }
 
         try:
-            self.logger.info("Making request to Google Custom Search API")
+            self.logger.debug("Sending request to Google API")
             response = requests.get(self.base_url, params=params, timeout=5)
 
             if response.status_code in (401, 403):
@@ -80,32 +64,25 @@ class GoogleSearchAPI(BaseSearch):
             response.raise_for_status()
             results = response.json()
 
-            # Check if 'items' exists in the results
             if 'items' not in results:
-                self.logger.warning("No search results found")
+                self.logger.debug("No search results found")
                 return []
 
-            items = results['items']
-            self.logger.info(f"Successfully received {len(items)} results from Google API")
-
-            # Format the results
-            formatted_results: List[SearchResult] = [
+            self.logger.debug(f"Processing {len(results['items'])} search results")
+            formatted_results = [
                 SearchResult(
                     title=item.get('title', ''),
                     link=item.get('link', ''),
                     snippet=item.get('snippet', '')
-                ) for item in items if 'title' in item and 'link' in item and 'snippet' in item
-                ## Can add CSE image and other fields if needed
+                ) for item in results['items']
+                if 'title' in item and 'link' in item and 'snippet' in item
             ]
 
             return formatted_results
 
         except requests.Timeout:
-            self.logger.error("Google search request timed out")
             raise SearchQueryError("Search request timed out")
         except requests.ConnectionError:
-            self.logger.error("Connection error during Google search")
             raise SearchQueryError("Connection error during search")
         except requests.exceptions.RequestException as e:
-            self.logger.error(f"Google search failed: {str(e)}")
             raise SearchQueryError(f"Search query failed: {str(e)}")

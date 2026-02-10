@@ -1,7 +1,6 @@
 from src.prompts.search import USE_SEARCH_RESULTS, USER_SEARCH_QUERY
 from src.schemas.chat import Chat, ChatRequest, ChatResponse, UserMessage, Role
 from src.schemas.search import WebRAGResponse
-from src.llm.models.base_llm import BaseLLM
 from src.llm.llm_registry import LLMRegistry
 from src.services.web_rag import WebRAGService
 from src.repositories.chat import ChatRepository
@@ -15,77 +14,34 @@ from ulid import ULID
 from typing import List
 import logging
 
-
 class ChatService:
     def __init__(self):
         self._llm_registry = LLMRegistry()
         self._chat_repository = ChatRepository()
         self._web_rag_service = WebRAGService()
-        self.logger = logging.getLogger(__name__)       # Set up logging, remove this if not needed
-
-    async def _handle_existing_chat(
-        self, 
-        chat_request: ChatRequest, 
-        chat: Chat, 
-        llm: BaseLLM,
-    ) -> AssistantMessage:
-        """Handle message processing for an existing chat."""
-        assistant_message = await llm.get_completion(
-            system_instruction=GENERAL_CHAT_PROMPT,
-            messages=chat.messages + [chat_request.message]
-        )
-
-        # Update the chat history
-        chat.messages.extend([chat_request.message, assistant_message])
-        
-        await self._chat_repository.update_messages(
-            chat_id=chat_request.chat_id,
-            messages=chat.messages
-        )
-        print(f"Updated chat history: {chat.messages}")
-        
-        return assistant_message
-
-    async def _handle_new_chat(
-        self, 
-        chat_request: ChatRequest, 
-        llm: BaseLLM,
-    ) -> AssistantMessage:
-        """Handle message processing for a new chat."""
-        assistant_message = await llm.get_completion(
-            system_instruction=GENERAL_CHAT_PROMPT,
-            messages=[chat_request.message]
-        )
-
-        # create new chat history
-        chat_history = [chat_request.message, assistant_message]
-        
-        new_chat = Chat(
-            chat_id=chat_request.chat_id,
-            title=chat_request.message.content,          # Use the user message as the title for now, TODO: improve this
-            messages=chat_history,
-        )
-        
-        await self._chat_repository.create(new_chat)
-        return assistant_message
+        self.logger = logging.getLogger(__name__)
 
     async def generate_chat_completion(self, chat_request: ChatRequest) -> ChatResponse:
         """Generate a chat completion from a user message."""
+        self.logger.debug(f"Starting chat completion for chat_id={chat_request.chat_id}")
+        
         llm = self._llm_registry.get_model(chat_request.model_id)
+        self.logger.debug(f"Using LLM model: {chat_request.model_id}")
+        
         chat_exists = await self._chat_repository.chat_exists(chat_request.chat_id)
+        self.logger.debug(f"Chat exists: {chat_exists}")
 
-        # execute the complete web RAG process
-        rag_response: WebRAGResponse = await self._web_rag_service.execute_web_rag(
+        self.logger.debug("Executing Web RAG process")
+        rag_response = await self._web_rag_service.execute_web_rag(
             user_message=chat_request.message,
             llm=llm,
             engine_id=SearchEngineID.GOOGLE
         )
 
-        # prepare system prompt and user message with Web RAG context if search was performed
+        self.logger.debug(f"Web search performed: {rag_response.search_performed}")
         if rag_response.search_performed and rag_response.search_results:
             system_prompt = USE_SEARCH_RESULTS
-
-            # Create a user message with the search query and formatted results
+            self.logger.debug("Using search-based system prompt")
             message_with_web_rag_context = UserMessage(
                 role=Role.USER,
                 content=USER_SEARCH_QUERY.format(
@@ -93,51 +49,42 @@ class ChatService:
                     formatted_results=rag_response.formatted_results
                 )
             )
-            self.logger.info(f"User message with Web RAG context: {message_with_web_rag_context.content}")
         else:
             system_prompt = GENERAL_CHAT_PROMPT
+            self.logger.debug("Using general system prompt")
             message_with_web_rag_context = UserMessage(
                 role=Role.USER,
-                content=chat_request.message.content    # use the original user message content if search was not performed
+                content=chat_request.message.content
             )
-            self.logger.info(f"User message without Web RAG context: {message_with_web_rag_context.content}")
 
         if chat_exists:
-            # handle existing chat
+            self.logger.debug("Updating existing chat")
             existing_chat = await self._chat_repository.get(chat_request.chat_id)
-
-            # generate completion using existing chat history and message with Web RAG context if available
+            self.logger.debug("Generating completion with chat history")
             assistant_message = await llm.get_completion(
                 system_instruction=system_prompt,
                 messages=existing_chat.messages + [message_with_web_rag_context]
             )
-
-            # update the chat history
-            user_message = chat_request.message
-            existing_chat.messages.extend([user_message, assistant_message])    # just store user message and assistant message without web RAG context
+            existing_chat.messages.extend([chat_request.message, assistant_message])
             await self._chat_repository.update_messages(
                 chat_id=chat_request.chat_id,
                 messages=existing_chat.messages
             )
         else:
-            # handle new chat
-
-            # generate completion using new chat history and message with Web RAG context if available
+            self.logger.debug("Creating new chat")
             assistant_message = await llm.get_completion(
                 system_instruction=system_prompt,
                 messages=[message_with_web_rag_context]
             )
-
-            # create new chat history
-            user_message = chat_request.message
-            chat_history = [user_message, assistant_message]        # just store user message and assistant message without web RAG context
+            chat_history = [chat_request.message, assistant_message]
             new_chat = Chat(
                 chat_id=chat_request.chat_id,
-                title=chat_request.message.content,  # Use the user message as the title for now, TODO: improve this
+                title=chat_request.message.content,
                 messages=chat_history,
             )
             await self._chat_repository.create(new_chat)
 
+        self.logger.debug("Completing chat generation")
         return ChatResponse(
             chat_id=chat_request.chat_id,
             message=assistant_message,

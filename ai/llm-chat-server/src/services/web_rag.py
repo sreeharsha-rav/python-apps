@@ -20,43 +20,41 @@ class WebRAGService:
 
     async def perform_web_search(self, user_message: UserMessage, llm: BaseLLM, engine_id: SearchEngineID = SearchEngineID.GOOGLE) -> List[SearchResult]:
         """
-        Perform a web search using the specified search engine, generate a search query, and return search results.
+        Perform a web search based on the user's message.
 
         Args:
             user_message: The user's message
             llm: The language model instance
-            engine_id: The search engine ID to use (defaults to Google)
+            engine_id: The search engine ID
 
         Returns:
             List[SearchResult]: A list of search results
         """
-        # Generate a web search query
+        self.logger.debug("Generating search query from user message")
         search_query: AssistantMessage = await llm.get_completion(
             system_instruction=GENERATE_SEARCH_QUERY,
             messages=[user_message]
         )
-        self.logger.info(f"Generated search query: {search_query.content}")
-
-        # Get the search engine and fetch results
+        self.logger.debug(f"Generated search query: {search_query.content}")
+        
+        self.logger.debug(f"Executing search with engine: {engine_id}")
         search_engine = self._search_registry.get_engine(engine_id)
-        search_results: List[SearchResult] = search_engine.search(
+        return search_engine.search(
             query=search_query.content,
             num_results=5
         )
 
-        self.logger.info(f"Found {len(search_results)} search results")
-        return search_results
-
     async def retrieve_content(self, url: str) -> Optional[str]:
         """
-        Retrieve and extract the main content from a web page.
+        Retrieve content from a given URL.
 
         Args:
-            url: The URL of the web page to scrape from SearchResult
+            url: The URL to retrieve content from
 
         Returns:
-            Optional[str]: The extracted text content or None if an error occurs
+            Optional[str]: The retrieved content or None if retrieval fails
         """
+        self.logger.debug(f"Retrieving content from URL: {url}")
         try:
             headers = {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
@@ -64,65 +62,39 @@ class WebRAGService:
             response = requests.get(url, headers=headers, timeout=10)
             response.raise_for_status()
 
+            self.logger.debug("Parsing and cleaning content")
             soup = BeautifulSoup(response.content, 'html.parser')
-
-            # Remove non-content elements
             for element in soup(['script', 'style', 'nav', 'footer', 'header', 'aside']):
                 element.decompose()
 
-            # Extract text content
             text = soup.get_text(separator='\n', strip=True)
-
-            # Basic text cleaning
             lines = [line.strip() for line in text.splitlines() if line.strip()]
             content = '\n'.join(lines)
 
-            # Truncate if too long (LLM context window limitations)
-            max_content_length = TRUNCATE_SCRAPED_TEXT * 4         # 4x the limit to account for tokenization
+            max_content_length = TRUNCATE_SCRAPED_TEXT * 4
             if len(content) > max_content_length:
-                content = content[:max_content_length] + "..."     # add ellipsis to indicate truncation for LLM
+                self.logger.debug(f"Content truncated from {len(content)} to {max_content_length} characters")
+                content = content[:max_content_length] + "..."
 
             return content
         except Exception as e:
-            self.logger.error(f"Error retrieving content from {url}: {str(e)}")
+            self.logger.error(f"Failed to retrieve content from {url}: {str(e)}")
             return None
 
     async def summarize_content(self, content: str, query: str, llm: BaseLLM) -> str:
-        """
-        Summarize web page content using the LLM.
-
-        Args:
-            content: The content to summarize from `retrieve_content()`
-            query: The original search query (not the generated one)
-            llm: The language model instance
-
-        Returns:
-            str: The summarized content
-        """
-
-        # Check if content is empty
         if not content:
-            self.logger.warning("No content to summarize.")
             return "No content available for summarization."
 
-        # generate a system prompt for summarization, add query, character limit
         system_prompt = SUMMARIZE_WEB_CONTENT.format(
             search_query=query,
             character_limit=CHARACTER_LIMIT,
         )
-        self.logger.info(f"System prompt for web content summarization: {system_prompt}")
-
-        # Create a user message with the web content to summarize
+        
         user_message = UserMessage(content=f"search_query: {query}\nweb_page_content:{content}")
-        self.logger.info(f"User message for summarization: {user_message.content}")
-
-        # Generate the summary using the LLM
         summary_response: AssistantMessage = await llm.get_completion(
             system_instruction=system_prompt,
             messages=[user_message]
         )
-
-        self.logger.info(f"Summarization response: {summary_response.content}")
 
         return summary_response.content
 
@@ -164,24 +136,19 @@ class WebRAGService:
 
         return ai_search_results
 
-    async def execute_web_rag(
-            self,
-            user_message: UserMessage,
-            llm: BaseLLM,
-            engine_id: SearchEngineID = SearchEngineID.GOOGLE
-    ):
+    async def execute_web_rag(self, user_message: UserMessage, llm: BaseLLM, engine_id: SearchEngineID = SearchEngineID.GOOGLE):
         """
-        Execute the Web RAG process: perform web search, retrieve content, and summarize it.
+        Execute the Web Retrieval-Augmented Generation (RAG) process.
 
         Args:
             user_message: The user's message
             llm: The language model instance
-            engine_id: The search engine ID to use (defaults to Google)
+            engine_id: The search engine ID
 
         Returns:
-            RAGResponse: A response object containing search results and summaries
+            WebRAGResponse: The response containing search results and formatted results
         """
-        # initialize RAG response
+        self.logger.debug("Starting Web RAG execution")
         rag_response = WebRAGResponse(
             search_performed=False,
             search_query=user_message.content,
@@ -190,48 +157,40 @@ class WebRAGService:
             total_results=0,
             engine_id=engine_id
         )
-        self.logger.info(f"Executing Web RAG for query: {user_message.content}")
 
-        # determine if a web search is needed
+        self.logger.debug("Checking if web search is needed")
         should_use_web_search = await llm.get_completion(
             system_instruction=SHOULD_USE_WEB_SEARCH,
             messages=[user_message]
         )
-        self.logger.info(f"Should use web search: {should_use_web_search.content}; Content type: {type(should_use_web_search.content)}")
 
-        if should_use_web_search.content == "true":         # currently using string comparison, TODO: improve this to bool data type
-            self.logger.info("Performing web search...")
-
-            # perform web search
-            search_results: List[SearchResult] = await self.perform_web_search(
+        if should_use_web_search.content == "true":
+            self.logger.debug("Web search needed, performing search")
+            search_results = await self.perform_web_search(
                 user_message=user_message,
                 llm=llm,
                 engine_id=engine_id
             )
 
-            # build search context
-            ai_search_results: List[AISearchResult] = await self.build_search_context(
+            self.logger.debug("Building search context")
+            ai_search_results = await self.build_search_context(
                 search_results=search_results,
                 search_query=user_message.content,
                 llm=llm
             )
-            self.logger.info(f"AI-enhanced search results: {ai_search_results}")
 
-            # format ai_search_results as readable text
+            self.logger.debug("Formatting search results")
             formatted_results = ""
             for i, result in enumerate(ai_search_results, 1):
                 formatted_results += f"[Source {i}] {result.title}\n"
                 formatted_results += f"URL: {result.link}\n"
                 formatted_results += f"Summary: {result.summary}\n\n"
 
-            self.logger.info(f"Formatted results: {formatted_results}")
-
-            # update rag response
             rag_response.search_performed = True
             rag_response.search_results = search_results
             rag_response.formatted_results = formatted_results
             rag_response.total_results = len(search_results)
         else:
-            self.logger.info("Web search not needed.")
+            self.logger.debug("Web search not needed")
 
         return rag_response
