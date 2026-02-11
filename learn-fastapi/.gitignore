@@ -24,3 +24,6 @@ logs
 # temp files
 *.tmp
 *.temp
+
+# db
+todos_app.db
