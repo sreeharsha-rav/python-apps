@@ -1,9 +1,22 @@
-import sys
 import time
 import logging
-from fastmcp.utilities.logging import get_logger
-from fastmcp.server.middleware import Middleware, MiddlewareContext
+import logging.config
+import uuid
+import sys
+from contextvars import ContextVar
+from fastapi import Request, Response
+from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 
+# ContextVar to hold request ID, ensuring async safety
+request_id_ctx_var: ContextVar[str | None] = ContextVar("request_id", default=None)
+
+class RequestIdFilter(logging.Filter):
+    """
+    Logging filter to inject request_id into log records from ContextVar.
+    """
+    def filter(self, record):
+        record.request_id = request_id_ctx_var.get() or "-"
+        return True
 
 class ConsoleFormatter(logging.Formatter):
     """
@@ -40,6 +53,7 @@ class ConsoleFormatter(logging.Formatter):
         # Formatting parts
         time_str = f"{self.CYAN}[{asctime}]{self.RESET}"
         level_str = f"{level_color}[{record.levelname}]{self.RESET}"
+        req_id_str = f"{self.MAGENTA}[{getattr(record, 'request_id', '-') or '-'}]{self.RESET}"
         name_str = f"{self.BLUE}[{record.name}]{self.RESET}"
         
         # Message
@@ -49,7 +63,7 @@ class ConsoleFormatter(logging.Formatter):
                 record.exc_text = self.formatException(record.exc_info)
             message += f"\n{record.exc_text}"
         
-        return f"{time_str} {level_str} {name_str} | {message}"
+        return f"{time_str} {level_str} {req_id_str} {name_str} | {message}"
 
 def configure_logging():
     """
@@ -61,7 +75,11 @@ def configure_logging():
     LOGGING_CONFIG = {
         "version": 1,
         "disable_existing_loggers": False,
-        "filters": {},
+        "filters": {
+            "request_id_filter": {
+                "()": RequestIdFilter,
+            }
+        },
         "formatters": {
             "default": {
                 "()": ConsoleFormatter,
@@ -73,7 +91,7 @@ def configure_logging():
                 "class": "logging.StreamHandler",
                 "stream": sys.stdout,
                 "formatter": "default",
-                "filters": [],
+                "filters": ["request_id_filter"],
             },
         },
         "loggers": {
@@ -82,34 +100,57 @@ def configure_logging():
                 "level": "INFO",
                 "propagate": False,
             },
+            "uvicorn": {
+                "handlers": ["console"],
+                "level": "DEBUG",
+                "propagate": False,
+            },
+            "fastapi": {
+                "handlers": ["console"],
+                "level": "DEBUG",
+                "propagate": False,
+            },
         },
     }
     logging.config.dictConfig(LOGGING_CONFIG)
 
-class LoggingMiddleware(Middleware):
-    async def on_message(self, context: MiddlewareContext, call_next):
-        """Middleware to log incoming requests and outgoing responses with timing and error handling."""
+
+class LogRequestsMiddleware(BaseHTTPMiddleware):
+    """
+    Middleware to log requests and responses with execution time.
+    Sets the request_id context variable for the duration of the request.
+    """
+    async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
+        request_id = request.headers.get("X-Request-ID", f"req_{uuid.uuid4()}")
+        token = request_id_ctx_var.set(request_id)
+        
         start_time = time.time()
-        logger = get_logger(__name__)
+        logger = logging.getLogger(__name__)
         
         try:
-            logger.info(f"method: {context.method} - source: {context.source} - type: {context.type} - message: {context.message}")
+            logger.info(f"{request.method} - {request.url}")
             
-            response = await call_next(context)
+            response = await call_next(request)
             
             process_time = (time.time() - start_time) * 1000
             
             logger.info(
-                f"Response: {response} "
+                f"Response: {response.status_code} "
                 f"| Time: {process_time:.2f}ms"
             )
+            
+            response.headers["X-Request-ID"] = request_id
+            
             return response
             
         except Exception as e:
             process_time = (time.time() - start_time) * 1000
             logger.error(
-                f"Request failed: method: {context.method} - source: {context.source} - type: {context.type} - message: {context.message} "
+                f"Request failed: {request.method} {request.url} "
                 f"| Time: {process_time:.2f}ms",
                 exc_info=True
             )
             raise e
+            
+        finally:
+            request_id_ctx_var.reset(token)
