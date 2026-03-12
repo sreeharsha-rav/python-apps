@@ -23,5 +23,5 @@ personal_log = "main.main:cli"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.9.9"
-black = "^25.1.0"
+black = "^26.3.1"
 pytest = "^8.3.4"
