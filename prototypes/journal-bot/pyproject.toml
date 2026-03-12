@@ -20,5 +20,5 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.9.6"
-black = "^25.1.0"
+black = "^26.3.1"
 
